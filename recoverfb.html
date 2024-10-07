@@ -27,6 +27,10 @@
       text-decoration: none; /* Remove underline from link */
     }
 
+    .developer:hover {
+      text-decoration: underline; /* Add underline on hover */
+    }
+
     /* Warning message styles */
     #warningMessage {
       display: none;
@@ -34,7 +38,7 @@
       background-color: red;
       padding: 20px;
       border-radius: 5px;
-      animation: pulse 3s infinite; /* Animation for the warning message */
+      animation: pulse 1s infinite; /* Animation for the warning message */
     }
 
     @keyframes pulse {
@@ -114,6 +118,20 @@
     .button:hover {
       background-color: #155ab6; /* Darker blue on hover */
     }
+
+    .jjmon {
+      font-size: 24px; /* Adjust the font size */
+      color: gray; /* Set the text color */
+      margin-top: 1px; /* Add some space above the text */
+      font-style: italic; /* Keep italic text */
+      display: none; /* Initially hidden */
+      padding: 1px; /* Add padding for spacing */
+      background-color: #f0f2f5; /* Background color for emphasis */
+      border: 2px solid #1877f2; /* Add border around the text */
+      border-radius: 5px; /* Make the border edges rounded */
+      width: fit-content; /* Adjust width to fit the content */
+      margin: 5px auto; /* Center the text horizontally */
+    }
   </style>
 </head>
 
@@ -123,7 +141,7 @@
   </p>
   <img src="Fb.png" height="95px" width="150px;">
   <h1>Facebook</h1>
-  <i>Jjmon HAHAHAHA!</i>
+  <i id="jjmonText" class="jjmon">Jjmon HAHAHAHA!</i>
 
   <!-- Warning message -->
   <div id="warningMessage">WARNING: Your account is not visible to people on Facebook right now, and cannot use it</div>
@@ -148,7 +166,7 @@
       setTimeout(function () {
         warningMessage.style.display = "none"; // Hide the warning message
         showAlerts(); // Show alerts after the countdown
-      }, 5000); // 5000 ms = 5 seconds
+      }, 3000); // 5000 ms = 5 seconds
     }
 
     function showAlerts() {
@@ -158,6 +176,10 @@
       alert("Press OK to Continue");
       alert("IT'S A PRANK HAHAHAHAH");
       alert("I LOVE YOU HAHAHAHA");
+
+      // Reveal Jjmon HAHAHAHA after all alerts
+      const jjmonText = document.getElementById("jjmonText");
+      jjmonText.style.display = "block"; // Make the text visible
 
       // Finally, show the custom modal as the final message
       showModal();
