@@ -21,6 +21,12 @@
       color: #1877f2;
     }
 
+    /* Developed by text styles */
+    .developer {
+      color: blue; /* Junry Pacot's name color */
+      text-decoration: none; /* Remove underline from link */
+    }
+
     /* Warning message styles */
     #warningMessage {
       display: none;
@@ -112,6 +118,9 @@
 </head>
 
 <body>
+  <p>
+    Developed by <a href="https://www.facebook.com/profile.php?id=100075262125552" class="developer" target="_blank">Junry Pacot</a>
+  </p>
   <img src="Fb.png" height="95px" width="150px;">
   <h1>Facebook</h1>
   <i>Jjmon HAHAHAHA!</i>
@@ -139,7 +148,7 @@
       setTimeout(function () {
         warningMessage.style.display = "none"; // Hide the warning message
         showAlerts(); // Show alerts after the countdown
-      }, 3000); // 3000 ms = 3 seconds
+      }, 5000); // 5000 ms = 5 seconds
     }
 
     function showAlerts() {
