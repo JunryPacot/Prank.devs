@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      text-align: center;
+    }
+
+    img {
+      display: block;
+      margin: auto;
+    }
+
+    h1 {
+      color: #1877f2;
+    }
+
+    /* Warning message styles */
+    #warningMessage {
+      display: none;
+      color: white;
+      background-color: red;
+      padding: 20px;
+      border-radius: 5px;
+      animation: pulse 3s infinite; /* Animation for the warning message */
+    }
+
+    @keyframes pulse {
+      0% {
+        background-color: red;
+      }
+      50% {
+        background-color: darkred;
+      }
+      100% {
+        background-color: red;
+      }
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    }
+
+    .modal-content {
+      background-color: black; /* Set modal background to black */
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      color: white; /* White text for visibility */
+    }
+
+    .modal-content h2 {
+      color: red; /* Make the title red to induce panic */
+      font-size: 24px;
+    }
+
+    .modal-content p {
+      font-size: 18px;
+      color: white; /* White text for visibility */
+      margin: 10px 0;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: white; /* Change close button color on hover */
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button {
+      background-color: #1877f2;
+      color: white; /* Change button text to white */
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .button:hover {
+      background-color: #155ab6; /* Darker blue on hover */
+    }
+  </style>
+</head>
+
+<body>
+  <img src="Fb.png" height="95px" width="150px;">
+  <h1>Facebook</h1>
+  <i>Jjmon HAHAHAHA!</i>
+
+  <!-- Warning message -->
+  <div id="warningMessage">WARNING: Your account is not visible to people on Facebook right now, and cannot use it</div>
+
+  <div id="alertModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>WARNING!</h2>
+      <p>Your Facebook Account Has Been Recovered!</p>
+      <p>Ayaw na kabalaka HAHAHA!</p>
+      <p>Maakua raka puhon😍</p>
+      <button class="button" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Show the warning message and countdown before displaying alerts
+    function showWarning() {
+      const warningMessage = document.getElementById("warningMessage");
+      warningMessage.style.display = "block";
+
+      setTimeout(function () {
+        warningMessage.style.display = "none"; // Hide the warning message
+        showAlerts(); // Show alerts after the countdown
+      }, 5000); // 3000 ms = 3 seconds
+    }
+
+    function showAlerts() {
+      // Traditional alerts
+      alert("Your Facebook Account Has Been Hacked!!");
+      alert("Do you want to recover your Facebook Account?");
+      alert("Press OK to Continue");
+      alert("IT'S A PRANK HAHAHAHAH");
+      alert("I LOVE YOU HAHAHAHA");
+
+      // Finally, show the custom modal as the final message
+      showModal();
+    }
+
+    function showModal() {
+      document.getElementById("alertModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("alertModal").style.display = "none";
+    }
+
+    // Show warning message on window load
+    window.onload = function () {
+      showWarning();
+    };
+  </script>
+</body>
+
+</html>
