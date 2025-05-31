@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <title>Facebook Prank</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -21,53 +21,52 @@
       color: #1877f2;
     }
 
-    /* Developed by text styles */
     .developer {
-      color: blue; /* Junry Pacot's name color */
-      text-decoration: none; /* Remove underline from link */
+      color: blue;
+      text-decoration: none;
     }
 
     .developer:hover {
-      text-decoration: underline; /* Add underline on hover */
+      text-decoration: underline;
     }
 
-    /* Warning message styles */
     #warningMessage {
       display: none;
       color: white;
       background-color: red;
       padding: 20px;
       border-radius: 5px;
-      animation: pulse 1s infinite; /* Animation for the warning message */
+      animation: pulse 1s infinite;
     }
 
     @keyframes pulse {
       0% {
         background-color: red;
       }
+
       50% {
         background-color: darkred;
       }
+
       100% {
         background-color: red;
       }
     }
 
-    /* Modal styles */
     .modal {
       display: none;
       position: fixed;
-      z-index: 1;
+      z-index: 2;
       left: 0;
       top: 0;
       width: 100%;
       height: 100%;
       overflow: auto;
-      background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+      background-color: rgba(0, 0, 0, 0.7);
     }
 
     .modal-content {
-      background-color: black; /* Set modal background to black */
+      background-color: black;
       margin: 15% auto;
       padding: 20px;
       border: 1px solid #888;
@@ -76,17 +75,17 @@
       text-align: center;
       border-radius: 10px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      color: white; /* White text for visibility */
+      color: white;
     }
 
     .modal-content h2 {
-      color: red; /* Make the title red to induce panic */
+      color: red;
       font-size: 24px;
     }
 
     .modal-content p {
       font-size: 18px;
-      color: white; /* White text for visibility */
+      color: white;
       margin: 10px 0;
     }
 
@@ -99,14 +98,14 @@
 
     .close:hover,
     .close:focus {
-      color: white; /* Change close button color on hover */
+      color: white;
       text-decoration: none;
       cursor: pointer;
     }
 
     .button {
       background-color: #1877f2;
-      color: white; /* Change button text to white */
+      color: white;
       padding: 10px 20px;
       border: none;
       border-radius: 5px;
@@ -116,21 +115,68 @@
     }
 
     .button:hover {
-      background-color: #155ab6; /* Darker blue on hover */
+      background-color: #155ab6;
     }
 
     .jjmon {
-      font-size: 24px; /* Adjust the font size */
-      color: gray; /* Set the text color */
-      margin-top: 1px; /* Add some space above the text */
-      font-style: italic; /* Keep italic text */
-      display: none; /* Initially hidden */
-      padding: 1px; /* Add padding for spacing */
-      background-color: #f0f2f5; /* Background color for emphasis */
-      border: 2px solid #1877f2; /* Add border around the text */
-      border-radius: 5px; /* Make the border edges rounded */
-      width: fit-content; /* Adjust width to fit the content */
-      margin: 5px auto; /* Center the text horizontally */
+      font-size: 24px;
+      color: gray;
+      margin-top: 1px;
+      font-style: italic;
+      display: none;
+      padding: 1px;
+      background-color: #f0f2f5;
+      border: 2px solid #1877f2;
+      border-radius: 5px;
+      width: fit-content;
+      margin: 5px auto;
+    }
+
+    /* Custom alert box */
+    .custom-alerts-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: black;
+      color: white;
+      border: 2px solid red;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 80%;
+      width: 300px;
+      z-index: 9999;
+      display: none;
+      font-size: 18px;
+      text-align: center;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .next-button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      background-color: red;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .next-button:hover {
+      background-color: darkred;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
     }
   </style>
 </head>
@@ -143,9 +189,16 @@
   <h1>Facebook</h1>
   <i id="jjmonText" class="jjmon">Jjmon HAHAHAHA!</i>
 
-  <!-- Warning message -->
+  <!-- Warning -->
   <div id="warningMessage">WARNING: Your account is not visible to people on Facebook right now, and cannot use it</div>
 
+  <!-- Custom alert box -->
+  <div id="customAlertsBox" class="custom-alerts-box">
+    <div id="customAlertText"></div>
+    <button class="next-button" onclick="showNextAlert()">Next</button>
+  </div>
+
+  <!-- Final Modal -->
   <div id="alertModal" class="modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
@@ -158,31 +211,42 @@
   </div>
 
   <script>
-    // Show the warning message and countdown before displaying alerts
+    const messages = [
+      "Your Facebook Account Has Been Hacked!!",
+      "Do you want to recover your Facebook Account?",
+      "Press Next to Continue",
+      "IT'S A PRANK HAHAHAHAH",
+      "I LOVE YOU HAHAHAHA"
+    ];
+
+    let alertIndex = 0;
+
     function showWarning() {
       const warningMessage = document.getElementById("warningMessage");
       warningMessage.style.display = "block";
 
-      setTimeout(function () {
-        warningMessage.style.display = "none"; // Hide the warning message
-        showAlerts(); // Show alerts after the countdown
-      }, 3000); // 5000 ms = 5 seconds
+      setTimeout(() => {
+        warningMessage.style.display = "none";
+        showCustomAlert();
+      }, 3000);
     }
 
-    function showAlerts() {
-      // Traditional alerts
-      alert("Your Facebook Account Has Been Hacked!!");
-      alert("Do you want to recover your Facebook Account?");
-      alert("Press OK to Continue");
-      alert("IT'S A PRANK HAHAHAHAH");
-      alert("I LOVE YOU HAHAHAHA");
+    function showCustomAlert() {
+      const alertBox = document.getElementById("customAlertsBox");
+      const alertText = document.getElementById("customAlertText");
+      alertText.textContent = messages[alertIndex];
+      alertBox.style.display = "block";
+    }
 
-      // Reveal Jjmon HAHAHAHA after all alerts
-      const jjmonText = document.getElementById("jjmonText");
-      jjmonText.style.display = "block"; // Make the text visible
-
-      // Finally, show the custom modal as the final message
-      showModal();
+    function showNextAlert() {
+      alertIndex++;
+      if (alertIndex < messages.length) {
+        showCustomAlert();
+      } else {
+        document.getElementById("customAlertsBox").style.display = "none";
+        document.getElementById("jjmonText").style.display = "block";
+        showModal();
+      }
     }
 
     function showModal() {
@@ -193,7 +257,6 @@
       document.getElementById("alertModal").style.display = "none";
     }
 
-    // Show warning message on window load
     window.onload = function () {
       showWarning();
     };
